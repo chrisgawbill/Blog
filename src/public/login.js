@@ -1,3 +1,4 @@
+import { doc, getDoc } from "firebase/firestore";
 window.onload = () => {
 
     
@@ -6,20 +7,16 @@ window.onload = () => {
     const loginEmailText = document.getElementById("login_email_text");
     const loginPasswordText = document.getElementById("login_password_text");
 
-    loginSubmitBtn.onclick = () => {
-        var adminRef = db.collection("Admin").doc("admin1");
-
-        adminRef.get().then((admin) => {
-            if (admin.exists) {
-                let adminEmail = admin.Email;
-                let adminPassword = admin.Password;
-                alert("Document data:", doc.data());
-            } else {
-                alert("We could not fetch the admin credentials!");
-            }
-        }).catch((error) => {
-            alert("Error getting document:", error);
-        });
+    loginSubmitBtn.onclick = async() =>{
+        const adminRef = doc(db, "Admins", "admin1");
+        const adminSnap = await getDoc(adminRef);
+        if(adminSnap.exists()){
+            let adminEmail = adminSnap.Email;
+            let adminPassword = adminSnap.Password;
+            alert(adminSnap.data());
+        }else{
+            alert("Something happened and we could not retrieve credentials!");
+        }
     }
     loginCancelBtn.onclick = () =>{
         let url = "http://localhost:8000/Home.html";
