@@ -1,25 +1,26 @@
-import { doc, getDoc } from "firebase/firestore";
 window.onload = () => {
 
-    
     const loginSubmitBtn = document.getElementById("login_submit");
     const loginCancelBtn = document.getElementById("login_cancel");
     const loginEmailText = document.getElementById("login_email_text");
     const loginPasswordText = document.getElementById("login_password_text");
 
-    loginSubmitBtn.onclick = async() =>{
-        const adminRef = doc(db, "Admins", "admin1");
-        const adminSnap = await getDoc(adminRef);
-        if(adminSnap.exists()){
-            let adminEmail = adminSnap.Email;
-            let adminPassword = adminSnap.Password;
-            alert(adminSnap.data());
-        }else{
-            alert("Something happened and we could not retrieve credentials!");
-        }
+    loginSubmitBtn.onclick = () =>{
+        let email = loginEmailText.value;
+        let password = loginPasswordText.value;
+        callLoginAPI(email, password)
     }
     loginCancelBtn.onclick = () =>{
         let url = "http://localhost:8000/Home.html";
         location.assign(url);
+    }
+    const callLoginAPI = (loginEmail, loginPassword) => {
+        $.ajax({
+            url: 'checkLogin/' + loginEmail + '/' + loginPassword, success: function (res) {
+                if(!(res === 'error')){
+                    alert("Success");
+                }
+            }
+        });
     }
 }
