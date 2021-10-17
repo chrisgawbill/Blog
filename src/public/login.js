@@ -2,12 +2,13 @@ window.onload = () => {
 
     const loginSubmitBtn = document.getElementById("login_submit");
     const loginCancelBtn = document.getElementById("login_cancel");
-    const loginEmailText = document.getElementById("login_email_text");
-    const loginPasswordText = document.getElementById("login_password_text");
+    const loginEmailText = document.getElementById("login_email_input");
+    const loginPasswordText = document.getElementById("login_password_input");
 
     loginSubmitBtn.onclick = () =>{
         let email = loginEmailText.value;
         let password = loginPasswordText.value;
+        console.log(email + password);
         callLoginAPI(email, password)
     }
     loginCancelBtn.onclick = () =>{
@@ -18,7 +19,9 @@ window.onload = () => {
         $.ajax({
             url: 'checkLogin/' + loginEmail + '/' + loginPassword, success: function (res) {
                 if(!(res === 'error')){
-                    alert("Success");
+                    console.log("Success");
+                }else{
+                    console.log("Error");
                 }
             }
         });
