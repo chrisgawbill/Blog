@@ -1,3 +1,6 @@
+#login_email_text, #login_password_text{
+    font-weight: bold;
+}
 .nav{
     width: 100%;
     background-color: cornflowerblue;
@@ -7,11 +10,7 @@
     font-family: monospace;
     text-align: center;
     margin-left: 40%;
-    margin-right: 15%;
-    float:left;
-}
-.nav button{
-    float:right;
+    margin-right: 40%;
 }
 .nav ul{
     width:50%;

@@ -7,13 +7,16 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/public/home.html');
 });
-app.get('home.html', function(req,res){
+app.get('/Home.html', function(req,res){
     res.sendFile(__dirname + "/public/home.html")
 });
-app.get('archive.html', function(req, res){
+app.get('/Archive.html', function(req, res){
     res.sendFile(__dirname + "public/archive.html");
 });
-app.get('about.html', function(req, res){
+app.get('/About.html', function(req, res){
     res.sendFile(__dirname + "public/about.html");
+});
+app.get('/Login.html', function(req, res){
+    res.sendFile(__dirname + "public/login.html");
 });
 app.listen(port);

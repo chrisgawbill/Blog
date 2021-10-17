@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chris Gawbills Blog</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link href="login.css" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src='login.js'></script>
+</head>
+
+<body>
+    <nav class='nav'>
+        <h1>Blog</h1>
+        <div class="no_float"></div>
+        <ul class='nav_list'>
+            <item class='nav_item'>Home</item>
+            <item class='nav_item'>Archives</item>
+            <item class='nav_item'>About Me</item>
+        </ul>
+    </nav>
+    <div id='login_div'>
+        <p id='login_email_text'>Username: <input id='login_email_input'></p>
+        <p id='login_password_text'>Password: <input id='login_password_input'></p>
+        <button id='login_submit'>Submit</button>
+        <button id='login_cancel'>Cancel</button>
+    </div>
+</body>
+
+</html>
