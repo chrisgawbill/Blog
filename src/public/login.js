@@ -20,6 +20,9 @@ window.onload = () => {
             url: 'checkLogin/' + loginEmail + '/' + loginPassword, success: function (res) {
                 if(!(res === 'error')){
                     console.log("Success");
+                    document.cookie = "adminStatus=verified";
+                    let url = "http://localhost:8000/Home.html";
+                    location.assign(url);
                 }else{
                     console.log("Error");
                 }
