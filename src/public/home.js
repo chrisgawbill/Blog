@@ -4,10 +4,18 @@ window.onload = () => {
     const logoutBtn = document.getElementById("btn_logout");
     const articleCancelBtn = document.getElementById("article_cancel_btn");
     const articleSubmitBtn = document.getElementById("article_submit_btn");
+
     const latestArticlesDiv = document.getElementById("latest_articles_div");
     const articleFormDiv = document.getElementById("article_form_div");
+    const featuredArticleDiv = document.getElementById("featured_article_div");
+    const currentMonthArticlesDiv = document.getElementById("current_month_article_div");
+
     const articleHeaderText = document.getElementById("article_header_input");
     const articleBodyText = document.getElementById("article_body_input");
+
+    const featuredArticleHeader = document.getElementById("featured_article_header");
+    const featuredArticleDate = document.getElementById("featured_article_date");
+    const featuredArticleBody = document.getElementById("featured_article_body");
 
     addArticleBtn.style.display = "none";
     logoutBtn.style.display = "none";
@@ -24,6 +32,7 @@ window.onload = () => {
             loginBtn.style.display = "none";
         }
     }
+
     loginBtn.onclick = () => {
         let url = "http://localhost:8000/Login.html";
         location.assign(url);
@@ -67,4 +76,23 @@ window.onload = () => {
             }
         });
     }
+    const callGetArticlesAPI = (currentMonth, currentYear) => {
+        $.ajax({
+            url: 'getArticles/' + currentMonth + "/" + currentYear, function(req, res) {
+                if(!(res === 'error')){
+                    console.log("Success");
+                    console.log(res);
+                    featuredArticleBody.innerText = res;
+                }else{
+                    console.log("Error");
+                }
+            }
+        });
+    }
+    const displayArticles = (article) => {
+    }
+    const date = new Date();
+    let currentMonth = date.getMonth();
+    let currentYear = date.getFullYear();
+    callGetArticlesAPI(currentMonth, currentYear);
 }

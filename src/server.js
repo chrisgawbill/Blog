@@ -56,7 +56,7 @@ let articleConverter = {
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new Article(data.month, data.day, data.year, data.time, data.header, data.body);
+        return new Article(data.Month, data.Day, data.Year, data.Time, data.Header, data.Body);
     }
 }
 app.use(express.static(__dirname + '/public'));
@@ -93,7 +93,26 @@ app.get('/checkLogin/:email/:password', function(req, res){
     })
 });
 app.get('/getArticles/:month/:year', function(req, res){
-    
+    let arrayArticles = [];
+    let selectedMonth = req.params.month;
+    let selectedYear = req.params.year;
+    db.collection("Articles").doc("9").collection("0").where("Month", "==", selectedMonth).where("Year", "==", selectedYear).withConverter(articleConverter).get().then((querySnapshot) =>{
+        querySnapshot.forEach((doc) =>{
+            let article = doc.data();
+            arrayArticles.push(article);
+        });
+        if(arrayArticles.length > 0){
+            res.send(arrayArticles);
+            console.log("success");
+        }else{
+            res.send("error");
+            console.log("size of 0");
+        }
+    })
+    .catch((error) => {
+        console.log(error);
+        res.send("error");
+    })
 });
 app.get('/uploadArticle/:month/:day/:year/:time/:header/:body', function(req, res){
     let article = new Article();
@@ -103,12 +122,12 @@ app.get('/uploadArticle/:month/:day/:year/:time/:header/:body', function(req, re
     article.time = req.params.time;
     article.header = req.params.header;
     article.body = req.params.body;
-    
+
     db.collection("Articles").doc(article.month + "/" + article.day + "/" + article.year + ":" + article.time).withConverter(articleConverter).set(article).then(() => {
         console.log("Article logged in database");
     })
 });
 app.get('/checkFirstArticleDate', function(req, res){
-    
+
 });
 app.listen(port);
