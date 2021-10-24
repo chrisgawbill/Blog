@@ -25,7 +25,7 @@ window.onload = () => {
     let cookie = document.cookie;
     if(cookie != null){
         let cookieArray = cookie.split(";");
-        let adminStatus = cookieArray[1].split("=")[1];
+        let adminStatus = cookieArray[0].split("=")[1];
         if(adminStatus === "verified"){
             addArticleBtn.style.display = "inline";
             logoutBtn.style.display = "inline";
@@ -78,11 +78,10 @@ window.onload = () => {
     }
     const callGetArticlesAPI = (currentMonth, currentYear) => {
         $.ajax({
-            url: 'getArticles/' + currentMonth + "/" + currentYear, function(req, res) {
+            url: 'getArticles/' + currentMonth + "/" + currentYear, success: function(res) {
                 if(!(res === 'error')){
                     console.log("Success");
-                    console.log(res);
-                    featuredArticleBody.innerText = res;
+                    featuredArticleBody.innerText = res[0].body;
                 }else{
                     console.log("Error");
                 }

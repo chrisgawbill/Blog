@@ -92,7 +92,7 @@ app.get('/checkLogin/:email/:password', function(req, res){
         console.error("Error getting the document, here is the full error: " + err);
     })
 });
-app.get('/getArticles/:month/:year', function(req, res){
+app.get('/getArticles/:month/:year', async function(req, res){
     let arrayArticles = [];
     let selectedMonth = req.params.month;
     let selectedYear = req.params.year;
