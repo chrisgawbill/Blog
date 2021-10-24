@@ -35,22 +35,6 @@ body{
     margin-right:5%;
     border-bottom:solid;
 }
-.article_div, #featured_article_div{
-    margin-left:25%;
-    margin-right:25%;
-    border-bottom:solid;
-}
-.article_date, #featured_article_date{
-    color:gray;
-}
-.article_header,.article_date, #featured_article_header, #featured_article_date{
-    text-align: center;
-}
 .no_float{
     clear: both;;
-}
-#other_articles_head{
-    text-align: center;
-    margin-top:1%;
-    margin-bottom:1%;
 }

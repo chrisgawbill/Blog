@@ -5,22 +5,16 @@ window.onload = () => {
     const articleCancelBtn = document.getElementById("article_cancel_btn");
     const articleSubmitBtn = document.getElementById("article_submit_btn");
 
-    const latestArticlesDiv = document.getElementById("latest_articles_div");
     const articleFormDiv = document.getElementById("article_form_div");
-    const featuredArticleDiv = document.getElementById("featured_article_div");
 
     const articleHeaderText = document.getElementById("article_header_input");
     const articleBodyText = document.getElementById("article_body_input");
 
-    const featuredArticleHeader = document.getElementById("featured_article_header");
-    const featuredArticleDate = document.getElementById("featured_article_date");
-    const featuredArticleBody = document.getElementById("featured_article_body");
-
     addArticleBtn.style.display = "none";
     logoutBtn.style.display = "none";
-    latestArticlesDiv.style.display = "inline";
     articleFormDiv.style.display = "none";
 
+    
     let cookie = document.cookie;
     if(cookie != null){
         let cookieArray = cookie.split(";");
@@ -43,12 +37,11 @@ window.onload = () => {
         document.cookie = "expires=" + pastDate.toUTCString() + ";";
         location.reload();
     }
+
     addArticleBtn.onclick = () =>{
-        latestArticlesDiv.style.display = "none";
         articleFormDiv.style.display = "inline";
     }
     articleCancelBtn.onclick = () =>{
-        latestArticlesDiv.style.display = "inline";
         articleFormDiv.style.display = "none";
     }
     articleSubmitBtn.onclick = () =>{
@@ -125,8 +118,4 @@ window.onload = () => {
             }
         }
     }
-    const date = new Date();
-    let currentMonth = date.getMonth();
-    let currentYear = date.getFullYear();
-    callGetArticlesAPI(currentMonth, currentYear);
 }
